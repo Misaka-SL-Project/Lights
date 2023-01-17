@@ -105,7 +105,8 @@ namespace Lights.Configs
                 {
                     new Preset<RoomType>(RoomType.EzCafeteria, ModifierType.Blackout, 45, 0),
                     new Preset<RoomType>(RoomType.Hcz049, ModifierType.Color, -1, 255, 100, 255),
-                    new Preset<RoomType>(RoomType.HczEzCheckpoint, ModifierType.Intensity, -1, 0.5f),
+                    new Preset<RoomType>(RoomType.HczEzCheckpointA, ModifierType.Intensity, -1, 0.5f),
+                    new Preset<RoomType>(RoomType.HczEzCheckpointB, ModifierType.Intensity, -1, 0.5f),
                 }
             },
             {
@@ -113,7 +114,8 @@ namespace Lights.Configs
                 {
                     new Preset<RoomType>(RoomType.Hcz096, ModifierType.Blackout, 45, 0),
                     new Preset<RoomType>(RoomType.HczCurve, ModifierType.Color, -1, 255, 100, 255),
-                    new Preset<RoomType>(RoomType.HczEzCheckpoint, ModifierType.Lockdown, 7, 0),
+                    new Preset<RoomType>(RoomType.HczEzCheckpointA, ModifierType.Intensity, -1, 0.5f),
+                    new Preset<RoomType>(RoomType.HczEzCheckpointB, ModifierType.Intensity, -1, 0.5f),
                 }
             },
         };

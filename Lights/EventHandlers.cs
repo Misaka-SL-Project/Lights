@@ -10,6 +10,9 @@ namespace Lights
     using System.Collections.Generic;
     using Exiled.API.Features;
     using Exiled.Events.EventArgs;
+    using Exiled.Events.EventArgs.Player;
+    using Exiled.Events.EventArgs.Server;
+    using Exiled.Events.EventArgs.Warhead;
     using MEC;
     using UnityEngine;
 
@@ -66,14 +69,14 @@ namespace Lights
                 var b = room.Color.b < config.TeslaGates.ColorSettings.B;
                 var belowColorMinimum = config.TeslaGates.ColorSettings.RequireAllMinimums ? r && g && b : r || g || b;
 
-                if (!room.LightsOn || belowColorMinimum || room.LightIntensity < config.TeslaGates.IntensityMinimum)
-                    ev.IsTriggerable = false;
+                if (room.AreLightsOff || belowColorMinimum || room.LightIntensity < config.TeslaGates.IntensityMinimum)
+                    ev.IsAllowed = false;
 
                 return;
             }
 
             if (DisabledTeslas.Contains(room.GetInstanceID()))
-                ev.IsTriggerable = false;
+                ev.IsAllowed = false;
         }
 
         /// <inheritdoc cref="Exiled.Events.Handlers.Warhead.OnStopping(StoppingEventArgs)"/>
@@ -94,12 +97,12 @@ namespace Lights
                 {
                     if (config.Presets.PerZone.TryTriggerPreset(id))
                     {
-                        Log.Debug($"Automatically ran initial zone preset: \"{id}\"", config.Debug);
+                        Log.Debug($"Automatically ran initial zone preset: \"{id}\"");
                         yield return Timing.WaitForSeconds(Random.Range(config.Presets.TimeBetweenMin, config.Presets.TimeBetweenMax));
                     }
                     else if (config.Presets.PerRoom.TryTriggerPreset(id))
                     {
-                        Log.Debug($"Automatically ran initial room preset: \"{id}\"", config.Debug);
+                        Log.Debug($"Automatically ran initial room preset: \"{id}\"");
                         yield return Timing.WaitForSeconds(Random.Range(config.Presets.TimeBetweenMin, config.Presets.TimeBetweenMax));
                     }
                     else
@@ -125,9 +128,9 @@ namespace Lights
                 }
 
                 if (config.Presets.PerZone.TryTriggerPreset(id))
-                    Log.Debug($"Automatically ran zone preset: \"{id}\"", config.Debug);
+                    Log.Debug($"Automatically ran zone preset: \"{id}\"");
                 else if (config.Presets.PerRoom.TryTriggerPreset(id))
-                    Log.Debug($"Automatically ran room preset: \"{id}\"", config.Debug);
+                    Log.Debug($"Automatically ran room preset: \"{id}\"");
                 else
                     Log.Error($"Couldn't find any presets with ID \"{id}\", make sure there's no typos.");
 
