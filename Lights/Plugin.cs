@@ -39,7 +39,7 @@ namespace Lights
         public override string Name => "LightsRE";
 
         /// <inheritdoc />
-        public override string Author => "Beryl - (Contributors: BuildBoy12)";
+        public override string Author => "Originally by Beryl, updated by Misaka_ZeroTwo - (Contributors: BuildBoy12)";
 
         /// <inheritdoc />
         public override string Prefix => "lights";
